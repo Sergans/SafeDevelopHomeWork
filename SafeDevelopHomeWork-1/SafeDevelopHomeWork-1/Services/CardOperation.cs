@@ -1,12 +1,19 @@
 ﻿using SafeDevelopHomeWork_1.Models;
+using SafeDevelopHomeWork_1.Data;
 
 namespace SafeDevelopHomeWork_1.Services
 {
+
     public class CardOperation : ICardServices
     {
-        public void AddCard(CardModel item)
+        private readonly DataBaseCard _dataBaseCard;
+        public CardOperation(DataBaseCard dataBaseCard)
         {
-            throw new NotImplementedException();
+            _dataBaseCard= dataBaseCard;
+        }
+        public void AddCard(CardModel card)
+        {
+            _dataBaseCard.Cards.Add(card);
         }
 
         public void Delete()
@@ -16,7 +23,7 @@ namespace SafeDevelopHomeWork_1.Services
 
         public List<CardModel> GetAll()
         {
-            throw new NotImplementedException();
+           return _dataBaseCard.Cards.ToList();
         }
 
         public CardModel GetById(int id)
