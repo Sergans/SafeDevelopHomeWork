@@ -12,7 +12,7 @@ namespace SafeDevelopHomeWork_1.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CardsBase;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=cardsbase;Trusted_Connection=True;");
         }
     }
 }

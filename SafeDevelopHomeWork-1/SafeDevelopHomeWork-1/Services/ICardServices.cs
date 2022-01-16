@@ -5,7 +5,7 @@ namespace SafeDevelopHomeWork_1.Services
     public interface ICardServices
     {
         void AddCard(CardModel card);
-        void Delete();
+        void Delete(int id);
         List<CardModel> GetAll();
         CardModel GetById(int id);
         void UpDate(int id);

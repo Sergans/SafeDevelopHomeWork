@@ -1,9 +1,13 @@
+using SafeDevelopHomeWork_1.Services;
+using SafeDevelopHomeWork_1.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddSingleton<CardOperation>();
+builder.Services.AddSingleton<DataBaseCard>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

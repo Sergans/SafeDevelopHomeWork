@@ -14,11 +14,14 @@ namespace SafeDevelopHomeWork_1.Services
         public void AddCard(CardModel card)
         {
             _dataBaseCard.Cards.Add(card);
+            _dataBaseCard.SaveChanges();
         }
 
-        public void Delete()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var card = GetById(id);
+           _dataBaseCard.Cards.Remove(card);
+           _dataBaseCard.SaveChanges();
         }
 
         public List<CardModel> GetAll()
@@ -28,7 +31,16 @@ namespace SafeDevelopHomeWork_1.Services
 
         public CardModel GetById(int id)
         {
-            throw new NotImplementedException();
+            var cards = GetAll();
+            foreach (var card in cards)
+            {
+                if (card.Id == id)
+                {
+                    return card;
+                }
+            }
+            return null;
+          
         }
 
         public void UpDate(int id)
