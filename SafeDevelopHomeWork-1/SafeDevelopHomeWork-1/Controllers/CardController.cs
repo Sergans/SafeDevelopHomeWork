@@ -64,8 +64,8 @@ namespace SafeDevelopHomeWork_1.Controllers
             if (_card == null)
                 return Ok("Записей нет");
 
-            _cardOperation.Delete(id);
-            return Ok($"{_card.Famaly}- удален");
+            _cardOperation.UpDate(id);
+            return Ok($"{_card.Famaly}- изменен");
         }
     }
 }
