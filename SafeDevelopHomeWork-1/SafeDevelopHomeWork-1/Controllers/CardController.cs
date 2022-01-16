@@ -54,5 +54,18 @@ namespace SafeDevelopHomeWork_1.Controllers
             _cardOperation.Delete(id);
             return Ok($"{_card.Famaly}- удален");
         }
+        [HttpPut("update")]
+        public IActionResult UpDate([FromQuery] int id)
+        {
+            if (_cardOperation.GetAll().Count == 0)
+                return Ok("База пуста");
+
+            var _card = _cardOperation.GetById(id);
+            if (_card == null)
+                return Ok("Записей нет");
+
+            _cardOperation.Delete(id);
+            return Ok($"{_card.Famaly}- удален");
+        }
     }
 }
