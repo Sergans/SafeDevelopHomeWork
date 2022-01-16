@@ -3,9 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SafeDevelopHomeWork_1.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/CardController")]
     [ApiController]
     public class CardController : ControllerBase
     {
+       [HttpGet("get")]
+       public IActionResult Get()
+        {
+            return Ok();
+        }
     }
 }
