@@ -8,6 +8,6 @@ namespace SafeDevelopHomeWork_1.Services
         void Delete(int id);
         List<CardModel> GetAll();
         CardModel GetById(int id);
-        void UpDate(int id);
+        void UpDate(CardModel card);
     }
 }

@@ -36,8 +36,17 @@ namespace SafeDevelopHomeWork_1.Controllers
         }
 
         [HttpPost("addcard")]
-        public IActionResult Add([FromBody]CardModel card)
+        public IActionResult Add([FromBody]ViewCardModel model)
         {
+            CardModel card = new CardModel()
+            {
+                Name = model.Name,
+                Famaly = model.Famaly,
+                CreatedDate = model.CreatedDate,
+                ValidPeriod = model.ValidPeriod,
+                CCV = model.CCV,
+                NomberCard = model.NomberCard
+            };
             _cardOperation.AddCard(card);
             return Ok();
         }
@@ -55,16 +64,16 @@ namespace SafeDevelopHomeWork_1.Controllers
             return Ok($"{_card.Famaly}- удален");
         }
         [HttpPut("update")]
-        public IActionResult UpDate([FromQuery] int id)
+        public IActionResult UpDate([FromBody]CardModel card)
         {
             if (_cardOperation.GetAll().Count == 0)
                 return Ok("База пуста");
 
-            var _card = _cardOperation.GetById(id);
+            var _card = _cardOperation.GetById(card.Id);
             if (_card == null)
                 return Ok("Записей нет");
 
-            _cardOperation.UpDate(id);
+            _cardOperation.UpDate(card);
             return Ok($"{_card.Famaly}- изменен");
         }
     }

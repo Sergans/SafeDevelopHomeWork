@@ -43,9 +43,22 @@ namespace SafeDevelopHomeWork_1.Services
           
         }
 
-        public void UpDate(int id)
+        public void UpDate(CardModel model)
         {
-            throw new NotImplementedException();
+            var cards = GetAll();
+            foreach (var card in cards)
+            {
+                if (card.Id == model.Id)
+                {
+                    card.Name = model.Name;
+                    card.Famaly = model.Famaly;
+                    card.CreatedDate = model.CreatedDate;
+                    card.ValidPeriod = model.ValidPeriod;
+                    card.CCV = model.CCV;
+                    card.NomberCard = model.NomberCard;
+                    _dataBaseCard.SaveChanges();
+                }
+            }
         }
     }
 }
