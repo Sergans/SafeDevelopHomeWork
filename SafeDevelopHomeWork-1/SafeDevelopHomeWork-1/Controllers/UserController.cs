@@ -34,13 +34,14 @@ namespace SafeDevelopHomeWork_1.Controllers
             return Ok();
         }
         [HttpPost("sign")]
+        
         public IActionResult Aurorize([FromQuery] string mail, [FromQuery] string password)
         {
             var user = _userOperation.Autorize(mail, password);
             if (user == null)
             return Ok("Пользователя нет");
 
-           return Ok(user);
+            return Ok(user);
 
         }
 

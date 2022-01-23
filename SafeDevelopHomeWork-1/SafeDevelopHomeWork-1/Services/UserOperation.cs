@@ -1,5 +1,7 @@
 ﻿using SafeDevelopHomeWork_1.Data;
 using SafeDevelopHomeWork_1.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace SafeDevelopHomeWork_1.Services
 {
@@ -14,6 +16,7 @@ namespace SafeDevelopHomeWork_1.Services
         {
             if (user != null)
             {
+                 user.Password = HashCode(user.Password);
                 _dataBaseUser.Add(user);
                 _dataBaseUser.SaveChanges();
             }
@@ -40,18 +43,25 @@ namespace SafeDevelopHomeWork_1.Services
         }
         public User Autorize(string mail,string password)
         {
+            
             if (string.IsNullOrWhiteSpace(mail) || string.IsNullOrWhiteSpace(password))
             return null;
 
             foreach(var user in GetAll())
             {
-                if(string.CompareOrdinal(user.Email, mail) == 0 && string.CompareOrdinal(user.Password, password) == 0)
+                if(string.CompareOrdinal(user.Email, mail) == 0 && string.CompareOrdinal(user.Password, HashCode(password)) == 0)
                 {
                     return user;
                 }
             }
            return null;
-            
+           
+        }
+        public string HashCode(string password)
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return Convert.ToBase64String(hash);
         }
     }
 }
