@@ -38,5 +38,20 @@ namespace SafeDevelopHomeWork_1.Services
         {
             throw new NotImplementedException();
         }
+        public User Autorize(string mail,string password)
+        {
+            if (string.IsNullOrWhiteSpace(mail) || string.IsNullOrWhiteSpace(password))
+            return null;
+
+            foreach(var user in GetAll())
+            {
+                if(string.CompareOrdinal(user.Email, mail) == 0 && string.CompareOrdinal(user.Password, password) == 0)
+                {
+                    return user;
+                }
+            }
+           return null;
+            
+        }
     }
 }

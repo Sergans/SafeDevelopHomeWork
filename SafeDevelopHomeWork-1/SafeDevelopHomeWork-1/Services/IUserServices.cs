@@ -8,5 +8,6 @@ namespace SafeDevelopHomeWork_1.Services
         List<User> GetAll();
         User GetById(int id);
         void UpDate(User user);
+
     }
 }

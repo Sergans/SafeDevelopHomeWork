@@ -23,7 +23,7 @@ namespace SafeDevelopHomeWork_1.Controllers
 
             return Ok(_userOperation.GetAll()); 
         }
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Add([FromQuery]string mail,[FromQuery]string password,[FromQuery]string role)
         {
             var user=new User(){ 
@@ -32,6 +32,16 @@ namespace SafeDevelopHomeWork_1.Controllers
                 Role=role };
             _userOperation.AddUser(user);
             return Ok();
+        }
+        [HttpPost("sign")]
+        public IActionResult Aurorize([FromQuery] string mail, [FromQuery] string password)
+        {
+            var user = _userOperation.Autorize(mail, password);
+            if (user == null)
+            return Ok("Пользователя нет");
+
+           return Ok(user);
+
         }
 
     }
