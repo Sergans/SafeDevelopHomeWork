@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using SafeDevelopHomeWork_1.Services;
 using SafeDevelopHomeWork_1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SafeDevelopHomeWork_1.Controllers
 {
     [Route("api/CardController")]
     [ApiController]
+    
     public class CardController : ControllerBase
     {
        private readonly CardOperation _cardOperation;
@@ -15,6 +17,7 @@ namespace SafeDevelopHomeWork_1.Controllers
             _cardOperation = cardOperation;
         }
        [HttpGet("get")]
+       [AllowAnonymous]
        public IActionResult Get()
         {
             if (_cardOperation.GetAll().Count == 0)

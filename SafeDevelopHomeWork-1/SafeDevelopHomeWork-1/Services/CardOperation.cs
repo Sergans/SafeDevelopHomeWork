@@ -6,8 +6,8 @@ namespace SafeDevelopHomeWork_1.Services
 
     public class CardOperation : ICardServices
     {
-        private readonly DataBaseCard _dataBaseCard;
-        public CardOperation(DataBaseCard dataBaseCard)
+        private readonly DataBase _dataBaseCard;
+        public CardOperation(DataBase dataBaseCard)
         {
             _dataBaseCard= dataBaseCard;
         }

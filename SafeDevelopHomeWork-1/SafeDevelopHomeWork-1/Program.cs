@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<CardOperation>();
-builder.Services.AddSingleton<DataBaseCard>();
+builder.Services.AddSingleton<DataBase>();
+builder.Services.AddSingleton<UserOperation>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
