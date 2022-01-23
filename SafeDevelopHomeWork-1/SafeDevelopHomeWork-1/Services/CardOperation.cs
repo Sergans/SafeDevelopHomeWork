@@ -13,8 +13,12 @@ namespace SafeDevelopHomeWork_1.Services
         }
         public void AddCard(CardModel card)
         {
-            _dataBaseCard.Cards.Add(card);
-            _dataBaseCard.SaveChanges();
+            if (card != null)
+            {
+                _dataBaseCard.Cards.Add(card);
+                _dataBaseCard.SaveChanges();
+            }
+            
         }
 
         public void Delete(int id)
