@@ -9,7 +9,11 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<CardOperation>();
 builder.Services.AddSingleton<DataBase>();
 builder.Services.AddSingleton<UserOperation>();
-
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireManagerOnly", policy =>
+          policy.RequireRole("Manager", "Admin"));
+});
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
