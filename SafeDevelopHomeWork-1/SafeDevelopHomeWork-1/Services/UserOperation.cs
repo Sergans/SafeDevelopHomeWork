@@ -59,8 +59,8 @@ namespace SafeDevelopHomeWork_1.Services
         }
         public string HashCode(string password)
         {
-            var md5 = MD5.Create();
-            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
+            var sha512 = SHA512.Create();
+            var hash = sha512.ComputeHash(Encoding.UTF8.GetBytes(password));
             return Convert.ToBase64String(hash);
         }
     }

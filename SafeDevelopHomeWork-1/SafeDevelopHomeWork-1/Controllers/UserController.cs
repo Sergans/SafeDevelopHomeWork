@@ -16,8 +16,10 @@ namespace SafeDevelopHomeWork_1.Controllers
             _userOperation= userOperation;
        }
         [HttpGet]
+       
         public IActionResult GetAll()
         {
+            
             if (_userOperation.GetAll().Count == 0)
                 return Ok("База пуста");
 
@@ -37,6 +39,7 @@ namespace SafeDevelopHomeWork_1.Controllers
         
         public IActionResult Aurorize([FromQuery] string mail, [FromQuery] string password)
         {
+            
             var user = _userOperation.Autorize(mail, password);
             if (user == null)
             return Ok("Пользователя нет");
