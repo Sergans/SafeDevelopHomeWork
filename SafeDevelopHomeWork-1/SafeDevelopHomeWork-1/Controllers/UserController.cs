@@ -15,8 +15,8 @@ namespace SafeDevelopHomeWork_1.Controllers
        {
             _userOperation= userOperation;
        }
-        [HttpGet]
-        [Authorize]
+        [HttpGet("get")]
+       [Authorize]
         public IActionResult GetAll()
         {
             
