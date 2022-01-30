@@ -39,7 +39,6 @@ namespace SafeDevelopHomeWork_1.Controllers
         
         public IActionResult Aurorize([FromQuery] string mail, [FromQuery] string password)
         {
-            
             var user = _userOperation.Autorize(mail, password);
             if (user == null)
             return Ok("Пользователя нет");

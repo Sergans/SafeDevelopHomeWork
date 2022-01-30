@@ -1,7 +1,9 @@
 ﻿using SafeDevelopHomeWork_1.Data;
 using SafeDevelopHomeWork_1.Models;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace SafeDevelopHomeWork_1.Services
 {
@@ -47,10 +49,17 @@ namespace SafeDevelopHomeWork_1.Services
             if (string.IsNullOrWhiteSpace(mail) || string.IsNullOrWhiteSpace(password))
             return null;
 
+           
+
             foreach(var user in GetAll())
             {
                 if(string.CompareOrdinal(user.Email, mail) == 0 && string.CompareOrdinal(user.Password, HashCode(password)) == 0)
                 {
+                    var claim = new List<Claim>()
+                    {
+                      new Claim(JwtRegisteredClaimNames.Sub,user.Email)
+                    };
+                    var token = new JwtSecurityToken();
                     return user;
                 }
             }
