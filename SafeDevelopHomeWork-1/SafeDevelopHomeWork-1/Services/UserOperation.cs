@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SafeDevelopHomeWork_1.Services
 {
@@ -43,24 +44,27 @@ namespace SafeDevelopHomeWork_1.Services
         {
             throw new NotImplementedException();
         }
-        public User Autorize(string mail,string password)
+        public string Autorize(string mail,string password)
         {
             
             if (string.IsNullOrWhiteSpace(mail) || string.IsNullOrWhiteSpace(password))
             return null;
 
-           
-
             foreach(var user in GetAll())
             {
                 if(string.CompareOrdinal(user.Email, mail) == 0 && string.CompareOrdinal(user.Password, HashCode(password)) == 0)
                 {
+                    var now = DateTime.UtcNow;
                     var claim = new List<Claim>()
                     {
-                      new Claim(JwtRegisteredClaimNames.Sub,user.Email)
+                      new Claim(JwtRegisteredClaimNames.Sub,user.Email),
+                      new Claim(JwtRegisteredClaimNames.Email, user.Email)
+                      
                     };
-                    var token = new JwtSecurityToken();
-                    return user;
+                    var jwt = new JwtSecurityToken(UserToken.Issuser,UserToken.Audience,claim,notBefore: now,expires: now.Add(TimeSpan.FromMinutes(UserToken.LifeTime)),signingCredentials: new SigningCredentials(UserToken.GetSymmetricSecurityKey(),SecurityAlgorithms.HmacSha256));
+                    var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+                    
+                    return encodedJwt;
                 }
             }
            return null;
