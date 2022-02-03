@@ -36,7 +36,7 @@ namespace SafeDevelopHomeWork_1.Controllers
             return Ok();
         }
         [HttpPost("sign")]
-        
+        [AllowAnonymous]
         public IActionResult Aurorize([FromQuery] string mail, [FromQuery] string password)
         {
             var user = _userOperation.Autorize(mail, password);

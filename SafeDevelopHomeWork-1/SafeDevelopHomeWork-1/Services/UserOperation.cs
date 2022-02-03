@@ -44,7 +44,7 @@ namespace SafeDevelopHomeWork_1.Services
         {
             throw new NotImplementedException();
         }
-        public string Autorize(string mail,string password)
+        public string? Autorize(string mail,string password)
         {
             
             if (string.IsNullOrWhiteSpace(mail) || string.IsNullOrWhiteSpace(password))
@@ -57,7 +57,7 @@ namespace SafeDevelopHomeWork_1.Services
                     var now = DateTime.UtcNow;
                     var claim = new List<Claim>()
                     {
-                      new Claim(JwtRegisteredClaimNames.Sub,user.Email),
+                      
                       new Claim(JwtRegisteredClaimNames.Email, user.Email)
                       
                     };
