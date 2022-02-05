@@ -16,7 +16,7 @@ namespace SafeDevelopHomeWork_1.Controllers
             _userOperation= userOperation;
        }
         [HttpGet("get")]
-        [Authorize]
+        [Authorize(Roles ="manager")]
         public IActionResult GetAll()
         {
             
@@ -26,6 +26,7 @@ namespace SafeDevelopHomeWork_1.Controllers
             return Ok(_userOperation.GetAll()); 
         }
         [HttpPost("add")]
+        [Authorize(Roles ="manager")]
         public IActionResult Add([FromQuery]string mail,[FromQuery]string password,[FromQuery]string role)
         {
             var user=new User(){ 

@@ -57,8 +57,9 @@ namespace SafeDevelopHomeWork_1.Services
                     var now = DateTime.UtcNow;
                     var claim = new List<Claim>()
                     {
-                      
-                      new Claim(JwtRegisteredClaimNames.Email, user.Email)
+
+                      new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                      new Claim(ClaimsIdentity.DefaultRoleClaimType,user.Role)
                       
                     };
                     var jwt = new JwtSecurityToken(UserToken.Issuser,UserToken.Audience,claim,notBefore: now,expires: now.Add(TimeSpan.FromMinutes(UserToken.LifeTime)),signingCredentials: new SigningCredentials(UserToken.GetSymmetricSecurityKey(),SecurityAlgorithms.HmacSha256));
