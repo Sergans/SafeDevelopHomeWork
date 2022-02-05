@@ -16,7 +16,7 @@ namespace SafeDevelopHomeWork_1.Controllers
             _userOperation= userOperation;
        }
         [HttpGet("get")]
-        [Authorize(Roles ="manager")]
+        [Authorize(Roles ="admin")]
         public IActionResult GetAll()
         {
             
@@ -26,15 +26,17 @@ namespace SafeDevelopHomeWork_1.Controllers
             return Ok(_userOperation.GetAll()); 
         }
         [HttpPost("add")]
-        [Authorize(Roles ="manager")]
+        [Authorize(Roles ="admin")]
         public IActionResult Add([FromQuery]string mail,[FromQuery]string password,[FromQuery]string role)
         {
             var user=new User(){ 
                 Email = mail,
                 Password=password,
                 Role=role };
-            _userOperation.AddUser(user);
-            return Ok();
+            if (_userOperation.AddUser(user))
+                return Ok("Регистрация прошла успешно");
+
+            return Ok("Пользователь с таким логином уже существует");
         }
         [HttpPost("sign")]
         [AllowAnonymous]
@@ -46,6 +48,20 @@ namespace SafeDevelopHomeWork_1.Controllers
 
             return Ok(user);
 
+        }
+        [HttpPost("registration")]
+        public IActionResult Registration([FromQuery] string mail, [FromQuery] string password)
+        {
+            var user = new User()
+            {
+                Email = mail,
+                Password = password,
+                Role = "user"
+            };
+            if(_userOperation.AddUser(user))
+            return Ok("Регистрация прошла успешно");
+
+            return Ok("Пользователь с таким логином уже существует");
         }
 
     }

@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using System.Linq;
 
 namespace SafeDevelopHomeWork_1.Services
 {
@@ -15,14 +16,24 @@ namespace SafeDevelopHomeWork_1.Services
         {
             _dataBaseUser = dataBaseUser;
         }
-        public void AddUser(User user)
+        public bool AddUser(User user)
         {
             if (user != null)
             {
-                 user.Password = HashCode(user.Password);
-                _dataBaseUser.Add(user);
-                _dataBaseUser.SaveChanges();
+                var models = GetAll();
+                foreach(var model in models)
+                {
+                    if (string.Compare(model.Email,user.Email)!=0)
+                    {
+                        user.Password = HashCode(user.Password);
+                        _dataBaseUser.Add(user);
+                        _dataBaseUser.SaveChanges();
+                        return true;
+                    }
+                }
+               
             }
+            return false; 
         }
 
         public void Delete(int id)

@@ -3,7 +3,7 @@ namespace SafeDevelopHomeWork_1.Services
 {
     public interface IUserServices
     {
-        void AddUser(User user);
+        bool AddUser(User user);
         void Delete(int id);
         List<User> GetAll();
         User GetById(int id);
