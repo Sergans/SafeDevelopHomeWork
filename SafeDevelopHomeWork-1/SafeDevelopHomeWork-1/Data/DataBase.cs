@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SafeDevelopHomeWork_1.Data
 {
-    public class DataBaseCard:DbContext
+    public class DataBase:DbContext
     {
        public DbSet<CardModel> Cards { get; set; }
-        public DataBaseCard()
+       public DbSet<User> Users { get; set; }
+        public DataBase()
         {
             Database.EnsureCreated();
         }
