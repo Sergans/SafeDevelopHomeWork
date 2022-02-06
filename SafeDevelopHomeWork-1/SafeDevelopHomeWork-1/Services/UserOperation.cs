@@ -23,17 +23,16 @@ namespace SafeDevelopHomeWork_1.Services
                 var models = GetAll();
                 foreach(var model in models)
                 {
-                    if (string.Compare(model.Email,user.Email)!=0)
+                    if (string.Compare(model.Email,user.Email)==0)
                     {
-                        user.Password = HashCode(user.Password);
-                        _dataBaseUser.Add(user);
-                        _dataBaseUser.SaveChanges();
-                        return true;
-                    }
-                }
-               
+                      return false;
+                }   }
+                 user.Password = HashCode(user.Password);
+                _dataBaseUser.Add(user);
+                _dataBaseUser.SaveChanges();
+                
             }
-            return false; 
+            return true; 
         }
 
         public void Delete(int id)
