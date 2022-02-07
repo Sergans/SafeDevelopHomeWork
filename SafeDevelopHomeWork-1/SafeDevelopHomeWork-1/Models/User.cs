@@ -1,6 +1,8 @@
-﻿namespace SafeDevelopHomeWork_1.Models
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+
+namespace SafeDevelopHomeWork_1.Models
 {
-    public class User
+    public class User:IdentityUser
     {
         public int Id { get; set; }
         public string Email { get; set; }
