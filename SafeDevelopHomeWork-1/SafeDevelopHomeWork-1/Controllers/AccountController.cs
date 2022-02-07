@@ -15,8 +15,8 @@ namespace SafeDevelopHomeWork_1.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signManager;
-        private readonly RoleManager<User> _roleManager;
-        AccountController(UserManager<User> userManager,SignInManager<User> signInManager,RoleManager<User> roleManager)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        AccountController(UserManager<User> userManager,SignInManager<User> signInManager,RoleManager<IdentityRole> roleManager)
         {
            _userManager= userManager;
            _signManager= signInManager;    
@@ -31,6 +31,7 @@ namespace SafeDevelopHomeWork_1.Controllers
             var result=await _userManager.CreateAsync(user,Password);
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, role.Name);
                 return Ok("Успешно");
             }
 
