@@ -3,33 +3,14 @@ using SafeDevelopHomeWork_1.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SafeDevelopHomeWork_1.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false;
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        // укзывает, будет ли валидироваться издатель при валидации токена
-        ValidateIssuer = false,
-        // строка, представляющая издателя
-        ValidIssuer = UserToken.Issuser,
-
-        // будет ли валидироваться потребитель токена
-        ValidateAudience = false,
-        // установка потребителя токена
-        ValidAudience = UserToken.Audience,
-        // будет ли валидироваться время существования
-        ValidateLifetime = true,
-
-        // установка ключа безопасности
-        IssuerSigningKey = UserToken.GetSymmetricSecurityKey(),
-        // валидация ключа безопасности
-        ValidateIssuerSigningKey = true,
-    };
-});
+builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationContext>();
 builder.Services.AddControllers();
 builder.Services.AddCors();
 builder.Services.AddSingleton<CardOperation>();
