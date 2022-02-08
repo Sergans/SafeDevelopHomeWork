@@ -1,4 +1,6 @@
-﻿namespace SafeDevelopHomeWork_1.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace SafeDevelopHomeWork_1.Models
 {
     public class CardModel
     {

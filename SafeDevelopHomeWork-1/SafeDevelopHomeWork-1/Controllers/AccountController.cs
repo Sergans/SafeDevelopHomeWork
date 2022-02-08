@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.IdentityModel;
 using Microsoft.AspNetCore.Identity;
-
-
+using SafeDevelopHomeWork_1.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SafeDevelopHomeWork_1.Controllers
 {
@@ -16,15 +16,18 @@ namespace SafeDevelopHomeWork_1.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        AccountController(UserManager<User> userManager,SignInManager<User> signInManager,RoleManager<IdentityRole> roleManager)
+       public AccountController(UserManager<User> userManager,SignInManager<User> signInManager,RoleManager<IdentityRole> roleManager)
         {
            _userManager= userManager;
            _signManager= signInManager;    
            _roleManager= roleManager;
         }
-        [HttpPost]
+        [HttpPost("add")]
+       // [Authorize]
         public async Task<IActionResult> Registration([FromQuery]string Name,[FromQuery]string Password,[FromQuery]string Role)
         {
+            ApplicationContext apl = new ApplicationContext();
+            
             var user=new User() { UserName = Name};
             var role=new IdentityRole() { Name = Role };
             await _roleManager.CreateAsync(role);
@@ -36,6 +39,18 @@ namespace SafeDevelopHomeWork_1.Controllers
             }
 
             return Ok("Ошибка");
+        }
+        [HttpPost("sign")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Sign([FromQuery] string Name, [FromQuery] string Password)
+        {
+            var result = await _signManager.PasswordSignInAsync(Name, Password, false,false);
+            if (result.Succeeded)
+            {
+                return Ok("Выполнен вход");
+            }
+
+            return Ok("Неверный логин или пароль");
         }
     }
 }
