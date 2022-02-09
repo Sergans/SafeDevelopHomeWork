@@ -22,14 +22,12 @@ namespace SafeDevelopHomeWork_1.Controllers
            _signManager= signInManager;    
            _roleManager= roleManager;
         }
-        [HttpPost("add")]
-       // [Authorize]
-        public async Task<IActionResult> Registration([FromQuery]string Name,[FromQuery]string Password,[FromQuery]string Role)
+        [HttpPost("registration")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Registration([FromQuery]string Name,[FromQuery]string Password)
         {
-            ApplicationContext apl = new ApplicationContext();
-            
             var user=new User() { UserName = Name};
-            var role=new IdentityRole() { Name = Role };
+            var role=new IdentityRole() { Name = "user" };
             await _roleManager.CreateAsync(role);
             var result=await _userManager.CreateAsync(user,Password);
             if (result.Succeeded)
