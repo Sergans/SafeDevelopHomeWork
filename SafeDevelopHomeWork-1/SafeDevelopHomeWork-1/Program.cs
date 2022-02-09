@@ -3,14 +3,15 @@ using Microsoft.OpenApi.Models;
 using SafeDevelopHomeWork_1.Models;
 
 using SafeDevelopHomeWork_1.Data;
-
+using SafeDevelopHomeWork_1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-
+builder.Services.AddSingleton<CardOperation>();
+builder.Services.AddSingleton<UserOperation>();
 builder.Services.AddDbContext<ApplicationContext>();
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
