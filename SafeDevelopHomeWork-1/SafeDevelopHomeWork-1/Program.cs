@@ -11,7 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<CardOperation>();
-builder.Services.AddSingleton<UserOperation>();
 builder.Services.AddDbContext<ApplicationContext>();
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();

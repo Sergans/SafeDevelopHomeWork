@@ -43,6 +43,7 @@ namespace SafeDevelopHomeWork_1.Controllers
         public async Task<IActionResult> Sign([FromQuery] string Name, [FromQuery] string Password)
         {
             var result = await _signManager.PasswordSignInAsync(Name, Password, false,false);
+             
             if (result.Succeeded)
             {
                 return Ok("Выполнен вход");
